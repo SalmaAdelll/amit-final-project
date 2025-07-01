@@ -1,249 +1,137 @@
-Absolutely! Below is a more professional and polished version of the `README.md` for your project:
+# 🧪 Demoblaze Web Automation Framework
 
-```markdown
-# Invalid Login Automation Test with Cucumber, TestNG, and Selenium WebDriver
-
-## Overview
-
-This repository contains an automation framework to test invalid login functionality on a web application. It utilizes **Cucumber** for behavior-driven development (BDD), **TestNG** for test execution, and **Selenium WebDriver** for browser automation. The tests simulate login attempts with incorrect credentials, ensuring the application correctly displays error messages for invalid logins.
+This project is a test automation framework built using **Java**, **Selenium WebDriver**, **Cucumber (BDD)**, and **TestNG** to automate end-to-end user flows on the [Demoblaze](https://www.demoblaze.com/) e-commerce demo website.
 
 ---
 
-## Tools and Technologies
+## 🚀 Features
 
-The following tools and technologies are used in this project:
-
-- **Programming Language**: Java
-- **Test Framework**: TestNG
-- **Behavior-Driven Development (BDD)**: Cucumber
-- **Browser Automation**: Selenium WebDriver
-- **Reporting**: Extent Reports (optional)
-- **IDE**: IntelliJ IDEA
-- **Build Tool**: Maven
+- Login functionality with valid and invalid credentials
+- Product selection from categories (e.g., Laptops)
+- Add multiple products to cart
+- Cart validation with product names and total
+- Alert handling after adding products
+- Clear cart before each run
+- Automated test execution with reporting
 
 ---
 
-## Project Structure
+## 🛠️ Technology Stack
 
-This project is organized into the following main components:
-
-- **Cucumber Feature Files**: Describes the test scenarios in Gherkin syntax.
-- **Step Definitions**: Java code implementing the steps in the feature files.
-- **Page Objects**: Encapsulates the interaction with the web page elements using the Page Object Model (POM) design pattern.
-
----
-
-## Test Scenarios
-
-### Scenario 1: Valid Login Test
-**Objective**: Verify that the system displays an error message when the user attempts to log in with incorrect credentials.
-
-**Steps**:
-1. Navigate to the automation website.
-2. Click on the **Signup/Login** button.
-3. Enter a valid email (`ali@gmail.com`) and an invalid password (`111111111111111111`).
-4. Click the **Login** button.
-5. Verify that the system displays an appropriate error message.
-
-### Scenario 2: Invalid Login with Scenario Outline
-**Objective**: Validate various invalid login scenarios with different combinations of email addresses and passwords.
-
-**Steps**:
-1. Navigate to the automation website.
-2. Click on the **Signup/Login** button.
-3. For each row in the examples table, enter the provided email and password.
-4. Click the **Login** button.
-5. Verify that the system displays the correct error message for each combination.
+| Tool/Library       | Description                                |
+|--------------------|--------------------------------------------|
+| Java 17+           | Programming language                       |
+| Selenium WebDriver | UI automation                              |
+| Cucumber           | Behavior-driven development (BDD)          |
+| TestNG             | Test execution framework                   |
+| Maven              | Dependency and build management            |
+| Extent Reports     | HTML reporting for test execution          |
+| IntelliJ IDEA      | Development environment                    |
 
 ---
 
-## Maven Dependencies
+## 🧾 Project Structure
+DemoblazeAutomation/
+├── src/
+│ └── test/
+│ ├── java/
+│ │ ├── Pages/ # Page Object Model classes
+│ │ ├── Steps/ # Step Definitions + Hooks
+│ │ └── TestRunner/ # Cucumber TestNG Runner
+│ └── resources/
+│ └── features/ # Gherkin .feature files
+├── pom.xml # Maven config with dependencies
+└── testng.xml # Optional TestNG suite file
 
-Ensure the following dependencies are added to your `pom.xml` file to enable the use of **Selenium**, **Cucumber**, **TestNG**, and other necessary libraries:
-
-```xml
-<dependencies>
-    <!-- Selenium WebDriver -->
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.27.0</version>
-    </dependency>
-    
-    <!-- TestNG for test execution -->
-    <dependency>
-        <groupId>org.testng</groupId>
-        <artifactId>testng</artifactId>
-        <version>7.10.2</version>
-        <scope>test</scope>
-    </dependency>
-    
-    <!-- Cucumber Java bindings -->
-    <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-java</artifactId>
-        <version>7.20.1</version>
-    </dependency>
-    
-    <!-- Cucumber TestNG runner -->
-    <dependency>
-        <groupId>io.cucumber</groupId>
-        <artifactId>cucumber-testng</artifactId>
-        <version>7.20.1</version>
-    </dependency>
-    
-    <!-- Extent Reports for reporting -->
-    <dependency>
-        <groupId>tech.grasshopper</groupId>
-        <artifactId>extentreports-cucumber7-adapter</artifactId>
-        <version>1.14.0</version>
-    </dependency>
-</dependencies>
-```
 
 ---
 
-## Cucumber Feature File
-
-The **feature file** defines the test scenarios using Gherkin syntax, making the tests human-readable and easy to maintain.
+## 🧪 Sample Test Scenario
 
 ```gherkin
-Feature: User login to automation web
+@smoke
+Scenario: Login and add products to cart
+  Given User navigates to Demoblaze website to login
+  When User clicks on the Login button
+  And User enters username "testuser"
+  And User enters password "testpass"
+  And User submits the login form
+  And User opens the laptops category
+  And User selects the first product
+  And User adds the first product to the cart
+  And User navigates back
+  And User clicks on the Home button
+  And User selects the second product
+  And User adds the second product to the cart
+  And User opens the cart page
+  Then The first product name should be "Sony vaio i5"
+  And The second product name should be "Nexus 6"
+  And The total amount should be "1180"
 
-  Scenario: valid login
-    Given user navigate to automation web
-    When user click on Signup or Login button
-    And user Enter email address "ali@gmail.com"
-    And user Enter password "111111111111111111"
-    And user click on login button
-    Then web will show error message
+▶️ How to Run the Project
 
-  @smoking
-  Scenario Outline: Invalid login
-    Given user navigate to automation web
-    When user click on Signup or Login button
-    And user Enter email address "<user>"
-    And user Enter password "<password>"
-    And user click on login button
-    Then web will show error message "<message>"
+📦 Prerequisites
+Java 17+
 
-    Examples:
-      | user             | password              | message |
-      | ali@gmail.com    | adsadsada             | xxxxxxxx|
-      | asda@gmail.com   | 111111111111111111    | xxxxxxx |
-      | 2222@gmail.com   | d43d4d4d              | zzzzzzz |
-```
+Maven
 
----
+IntelliJ IDEA (or any Java IDE)
 
-## Step Definitions
+Chrome Browser
 
-The **Step Definitions** file implements the Gherkin steps in Java using Selenium WebDriver to interact with the web application.
+📥 Clone and Install
+git clone https://github.com/your-username/demoblaze-automation.git
+cd demoblaze-automation
+mvn clean install
 
-```java
-package Steps;
+🚀 Execute Tests
+From Terminal:
+mvn test
 
-import Pages.Login;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.testng.Assert;
+From IntelliJ:
 
-public class Steps {
-    Login login = new Login();
+Right-click Runner.java and select Run.
 
-    @Given("user navigate to automation web")
-    public void user_navigate_to_automation_web() {
-        login.OpenBrowser();
-    }
+📈 Reporting
+After execution, an interactive Extent Report is generated automatically.
 
-    @When("user click on Signup or Login button")
-    public void user_click_on_Signup_or_Login_button() throws InterruptedException {
-        login.SignUp_Login_button().click();
-    }
+📄 Location:
+/test-output/ExtentReport.html
 
-    @And("user Enter email address {string}")
-    public void user_Enter_email_address(String email) throws InterruptedException {
-        login.Email().sendKeys(email);
-    }
+Features:
 
-    @And("user Enter password {string}")
-    public void user_Enter_password(String password) throws InterruptedException {
-        login.pass().sendKeys(password);
-    }
+Detailed test status (pass/fail)
 
-    @And("user click on login button")
-    public void user_click_on_login_button() throws InterruptedException {
-        login.Login_button().click();
-    }
+Screenshots on failure (optional)
 
-    @Then("web will show error message {string}")
-    public void web_will_show_error_message(String message) throws InterruptedException {
-        String expected = message;
-        String actual = login.Actual().getText();
-        Assert.assertEquals(actual, expected);
-    }
-}
-```
+Step-wise logs and timestamps
 
----
+⚙️ Configuration
+You can adjust application URL or timeouts (future scope) using a config.properties file:
+baseUrl=https://demoblaze.com/
 
-## Running the Tests
+Accessed via utility method (if added):
+ConfigReader.get("baseUrl");
 
-### Prerequisites
+🧑‍💻 Maintainer
+👤 Salma Adel
 
-1. **Java 8+**: Ensure you have Java 8 or later installed.
-2. **Maven**: Ensure Maven is installed to manage project dependencies.
-3. **WebDriver**: Download the necessary WebDriver (e.g., **ChromeDriver** for Chrome).
+💬 Open for collaboration and feedback!
 
-### Steps to Execute Tests
+📄 License
+This project is licensed under the MIT License. See LICENSE for more details.
 
-1. **Clone the repository**:
 
-   ```bash
-   git clone https://github.com/your-username/invalid-login-automation.git
-   ```
 
-2. **Open the project in IntelliJ IDEA**:
-   Open the project directly in **IntelliJ IDEA**. IntelliJ will automatically recognize the Maven configuration and download the necessary dependencies.
 
-3. **Build the project with Maven**:
-   In the terminal, navigate to the project folder and run:
 
-   ```bash
-   mvn clean install
-   ```
 
-4. **Run the Tests**:
-   You can execute the tests via the **TestNG** runner. Right-click on the **TestNG XML** file or use the **Run** option in IntelliJ to execute the tests.
 
-   Alternatively, run the tests from the terminal using:
 
-   ```bash
-   mvn test
-   ```
 
-5. **View Test Results**:
-   After executing the tests, you can view the results in the **TestNG console** or, if integrated, in **Extent Reports** HTML format.
 
----
 
-## Conclusion
 
-This project provides a comprehensive automation framework to test invalid login scenarios using **Cucumber**, **TestNG**, and **Selenium WebDriver**. It ensures that the web application handles invalid login attempts correctly by displaying the expected error messages.
 
-Feel free to customize the feature files, extend test cases, or integrate additional reporting tools as needed.
 
----
 
-## License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-```
-
-### Key Improvements:
-- **Professional Tone**: The language is clear, formal, and structured.
-- **Detailed Instructions**: Steps for setting up and running the project are more explicit.
-- **Project Structure**: Sections like **Tools and Technologies** and **Project Structure** provide better clarity.
-- **Consistent Formatting**: Improved use of headings, code blocks, and lists for readability.

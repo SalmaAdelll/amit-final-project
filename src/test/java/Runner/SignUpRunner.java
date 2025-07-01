@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         (
         features = "src/main/resources/feature",
         glue = {"Steps"},
-        // plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+        plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         tags = "@smo"
         )
 
